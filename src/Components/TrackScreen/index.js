@@ -79,9 +79,6 @@ const TrackScreen = ({
                     <Text style={styles.title}>{playlistName}</Text>
                 </View>
                 <ScrollView alwaysBounceVertical={false}>
-                    {/* <View style={{position: 'absolute', left: 0, top: 40}}>
-                        <HeaderBackButton onPress={() => navigation.goBack()} tintColor={constants.colorGray} />
-                    </View> */}
                     <Animated.View style={styles.imageContainer}>
                         <Image style={styles.image} resizeMethod="resize" resizeMode="contain" source={{ uri: trackState.album.images[0].url }} />
                     </Animated.View>

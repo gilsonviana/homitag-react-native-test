@@ -27,7 +27,7 @@ const PlaylistTrack = ({
                 <Text style={styles.subHeading}>{artistName}</Text>
             </View>
             <View style={styles.rightContainer}>
-                <Text>{popularity}</Text>
+                <Text style={{color: constants.colorGray}}>{popularity}</Text>
                 <Image style={styles.icon} source={require('../../../Assets/icons/heart.png')} />
             </View>
         </TouchableOpacity>

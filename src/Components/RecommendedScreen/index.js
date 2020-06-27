@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, FlatList, Text, Animated, StyleSheet, SafeAreaView } from 'react-native'
+import { FlatList, Animated, StyleSheet, SafeAreaView } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
