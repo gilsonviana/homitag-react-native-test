@@ -4,6 +4,7 @@ export default {
     colorDark: '#30475e',
     colorPrimary: '#f2a365',
     colorGray: '#ececec',
+    colorDanger: '#e84a5f',
 
     // Spacing
     margin: 8,
