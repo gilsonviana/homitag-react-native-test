@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, FlatList, Text, Animated, Dimensions, StyleSheet } from 'react-native'
+import { View, FlatList, Text, Animated, StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux'
 
@@ -14,10 +14,7 @@ const RecommendedScreen = ({
     getRecommendations,
     recommendations
 }) => {
-    const { useState, useEffect } = React
-
-    console.log("RecommendedScreen", recommendations);
-    
+    const { useState, useEffect } = React 
     
     const [scrollY] = useState(new Animated.Value(0))
 
@@ -44,7 +41,7 @@ const RecommendedScreen = ({
             <Animated.View>
                 <LinearGradient colors={[constants.colorPrimary, constants.colorBlack]}>
                     <Text style={styles.title}>Recommendations</Text>
-                    <Text style={styles.heading}>Let us handle the playlists for you</Text>
+                    <Text style={styles.heading}>{recommendations.message}</Text>
                 </LinearGradient>
             </Animated.View>
             <FlatList 
@@ -58,8 +55,8 @@ const RecommendedScreen = ({
                 )}
                 numColumns={2}
                 style={styles.list}
-                data={recommendations}
-                renderItem={({ item }) => <PlaylistItem numOfTracks={item.numOfTracks} albumUri={item.image}/>}
+                data={recommendations.playlists}
+                renderItem={({ item }) => <PlaylistItem numOfTracks={item.tracks.total} albumUri={item.images[0].url}/>}
                 keyExtractor={(item) => item.id}
             />
         </View>
