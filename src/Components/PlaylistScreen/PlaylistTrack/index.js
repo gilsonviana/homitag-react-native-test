@@ -6,6 +6,7 @@ import { useNavigation } from '@react-navigation/native';
 import constants from '../../../Constants'
 
 const PlaylistTrack = ({
+    playlistName,
     href,
     popularity,
     trackName,
@@ -15,7 +16,7 @@ const PlaylistTrack = ({
     const navigation = useNavigation()
 
     const handleOnPress = () => {
-        navigation.navigate('Track', { href: href })
+        navigation.navigate('Track', { href, playlistName })
     }
 
     return (
@@ -52,7 +53,6 @@ const styles = StyleSheet.create({
         color: constants.colorGray
     },
     icon: {
-        // flex: 1,
         width: 18,
         height: 18
     },
@@ -63,6 +63,7 @@ const styles = StyleSheet.create({
 })
 
 PlaylistTrack.propTypes = {
+    playlistName: PropTypes.string.isRequired,
     href: PropTypes.string.isRequired,
     popularity: PropTypes.number.isRequired,
     trackName: PropTypes.string.isRequired,

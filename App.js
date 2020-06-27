@@ -14,25 +14,18 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import configureStore from './src/Store'
 
-import RecommendedScreen from './src/Components/RecommendedScreen'
-import PlaylistScreen from './src/Components/PlaylistScreen'
+import MainStack from './src/Components/MainStack'
 import TrackScreen from './src/Components/TrackScreen'
-import constants from './src/Constants';
 
-const Stack = createStackNavigator();
+const Stack = createStackNavigator()
 const store = configureStore()
 
 const App: () => React$Node = () => {
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<Stack.Navigator screenOptions={{headerShown: false}}>
-					<Stack.Screen 
-						name="Recommended" 
-						component={RecommendedScreen} />
-					<Stack.Screen 
-						name="Playlist" 
-						component={PlaylistScreen} />
+				<Stack.Navigator mode="modal" screenOptions={{headerShown: false}}>
+					<Stack.Screen name="Main" component={MainStack}/>
 					<Stack.Screen 
 						name="Track"
 						component={TrackScreen}
