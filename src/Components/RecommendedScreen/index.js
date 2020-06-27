@@ -6,13 +6,18 @@ import { connect } from 'react-redux'
 import constants from '../../Constants'
 
 import PlaylistItem from './PlaylistItem'
+import { getToken } from '../../Store/Auth/actions'
 import { getRecommendations } from '../../Store/Recommendations/actions'
 
 const RecommendedScreen = ({
+    getToken,
     getRecommendations,
     recommendations
 }) => {
     const { useState, useEffect } = React
+
+    console.log("RecommendedScreen", recommendations);
+    
     
     const [scrollY] = useState(new Animated.Value(0))
 
@@ -20,14 +25,18 @@ const RecommendedScreen = ({
     const HEADER_MIN_HEIGHT = 0;
 
     useEffect(() => {
-        const recommendationsRequest = async () => {
+        const tokenRequest = async () => {
             try {
-                await getRecommendations()
-            } catch (e) {
+                const token = await getToken()
 
+                if (token) {
+                    await getRecommendations(token)
+                }
+            } catch (e) {
+                console.log("useEffect", e.response);   
             }
         }
-        recommendationsRequest()
+        tokenRequest()
     }, [])
 
     return (
@@ -84,4 +93,4 @@ const mapStateToProps = (state) => ({
     recommendations: state.recommendations
 })
 
-export default connect(mapStateToProps, { getRecommendations })(RecommendedScreen)
+export default connect(mapStateToProps, { getRecommendations, getToken })(RecommendedScreen)
