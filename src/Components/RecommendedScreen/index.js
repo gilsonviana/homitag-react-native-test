@@ -43,9 +43,10 @@ const RecommendedScreen = ({
                     await getRecommendations(token)
                 }
             } catch (e) {
-                console.log("useEffect", e.response);
+                console.log("RecommendedScreen ===> useEffect", e);
             }
         }
+
         tokenRequest()
     }, [])
 
@@ -57,7 +58,7 @@ const RecommendedScreen = ({
                         height: headerHeight,
                     }}
                 >
-                    <Animated.Text style={[styles.title, {opacity: textOpacity}]}>{recommendations.message}</Animated.Text>
+                    <Animated.Text style={[styles.title, { opacity: textOpacity }]}>{recommendations.message}</Animated.Text>
                 </Animated.View>
                 <FlatList
                     scrollEventThrottle={16}
