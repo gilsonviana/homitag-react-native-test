@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { SafeAreaView, ScrollView, Text, Image, View, Animated, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
+import { SafeAreaView, ScrollView, Text, ActivityIndicator, Image, View, Animated, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import {  } from '@react-navigation/stack'
 import LinearGradient from 'react-native-linear-gradient'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import Toast from 'react-native-tiny-toast'
 
 import playlistService from '../../Services/playlist'
 import constants from '../../Constants'
@@ -17,6 +18,7 @@ const TrackScreen = ({
     const { href, playlistName } = route.params
     const { width } = Dimensions.get('screen')
 
+    const [isLoading, setIsLoading] = useState(true)
     const [trackState, setTrackState] = useState(null)
     const [transitionX] = useState(new Animated.Value(0))
 
@@ -30,11 +32,22 @@ const TrackScreen = ({
         const trackRequest = async () => {
             try {
                 const res = await playlistService(token).getTrack(href)
+                setIsLoading(false)
                 setTrackState({
                     ...res
                 })
             } catch (e) {
-
+                setIsLoading(false)
+                Toast.show(
+                    'Please, check your internet connection.',
+                    {
+                        position: 70,
+                        duration: 3500,
+                        containerStyle: {
+                            backgroundColor: constants.colorDanger
+                        }
+                    }
+                )
             }
         }
 
@@ -65,8 +78,28 @@ const TrackScreen = ({
         trackTitleAnimation()
     }, [token])
 
+    if (isLoading) {
+        return (
+            <LinearGradient style={styles.container} colors={[constants.colorPrimary, constants.colorDark, constants.colorDark]}>
+                <ActivityIndicator style={{flex: 1, alignSelf: 'center'}} color={constants.colorGray} size="large" />
+            </LinearGradient>
+        )
+    }
+
     if (!trackState) {
-        return <Text>loading</Text>
+        return (
+            <LinearGradient style={[styles.container, {justifyContent: 'center'}]} colors={[constants.colorPrimary, constants.colorDark, constants.colorDark]}>
+                <View style={{height: 300, margin: 'auto'}}>
+                    <Image blurRadius={.5} style={{flex: 1, width: undefined}} resizeMode="contain" resizeMethod="resize" source={require('../../Assets/images/void.png')} />
+                </View>
+                <Text style={{textAlign: 'center', color: constants.colorGray, marginTop: 50}}>No internet connection</Text>
+                <TouchableOpacity onPress={() => navigation.goBack()} style={{width: 200, alignSelf: 'center', marginTop: 40}}>
+                    <LinearGradient style={{borderRadius: 2, paddingVertical: 12}} colors={[constants.colorPrimary, constants.colorBlack]}>
+                        <Text style={{color: constants.colorGray, textAlign: 'center'}}>Go Back</Text>
+                    </LinearGradient>
+                </TouchableOpacity>
+            </LinearGradient>
+        )
     }
 
     return (
