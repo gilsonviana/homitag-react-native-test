@@ -40,9 +40,9 @@ const PlaylistScreen = ({
 
     return (
         <SafeAreaView style={styles.container}>
-            {/* <View style={{position: 'absolute', left: 0, top: 40}}>
+            <View style={{position: 'absolute', left: 0, top: 40}}>
                 <HeaderBackButton onPress={() => navigation.goBack()} tintColor={constants.colorGray} />
-            </View> */}
+            </View>
             <Animated.View style={styles.imageContainer}>
                 <Image style={styles.image} resizeMethod="resize" resizeMode="contain" source={{uri: playlistState.images[0].url}}/>
             </Animated.View>
@@ -66,7 +66,8 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         flex: 1,
-        height: 250
+        height: 250,
+        marginHorizontal: constants.margin * 6,
     },
     image: {
         flex: 1,
@@ -74,11 +75,10 @@ const styles = StyleSheet.create({
     },
     wrapper: {
         flex: 1,
-        marginTop: 22,
         marginHorizontal: constants.margin
     },
     title: {
-        marginTop: 22,
+        marginBottom: 12,
         textAlign: 'center',
         fontSize: constants.title,
         color: constants.colorGray,

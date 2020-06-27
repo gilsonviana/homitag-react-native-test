@@ -13,7 +13,7 @@ const PlaylistTrack = ({
     return (
         <TouchableOpacity style={styles.container}>
             <Image style={styles.image} source={{uri: imageUrl}}/>
-            <View>
+            <View style={{flex: 1}}>
                 <Text style={styles.heading}>{trackName}</Text>
                 <Text style={styles.subHeading}>{artistName}</Text>
             </View>
@@ -32,8 +32,8 @@ const styles = StyleSheet.create({
         marginVertical: constants.margin,
     },
     image: {
-        width: 36,
-        height: 36,
+        width: 64,
+        height: 64,
         marginRight: 12
     },
     heading: {
@@ -44,13 +44,13 @@ const styles = StyleSheet.create({
         color: constants.colorGray
     },
     icon: {
-        flex: 1,
+        // flex: 1,
         width: 18,
         height: 18
     },
     rightContainer: {
         marginLeft: 'auto',
-        paddingHorizontal: 8
+        alignItems: 'center'
     }
 })
 
