@@ -1,17 +1,25 @@
 import * as React from 'react'
 import { TouchableOpacity, Text, View, StyleSheet, Image } from 'react-native'
 import PropTypes from 'prop-types'
+import { useNavigation } from '@react-navigation/native';
 
 import constants from '../../../Constants'
 
 const PlaylistTrack = ({
+    href,
     popularity,
     trackName,
     artistName,
     imageUrl
 }) => {
+    const navigation = useNavigation()
+
+    const handleOnPress = () => {
+        navigation.navigate('Track', { href: href })
+    }
+
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity onPress={handleOnPress} style={styles.container}>
             <Image style={styles.image} source={{uri: imageUrl}}/>
             <View style={{flex: 1}}>
                 <Text style={styles.heading}>{trackName}</Text>
@@ -55,6 +63,7 @@ const styles = StyleSheet.create({
 })
 
 PlaylistTrack.propTypes = {
+    href: PropTypes.string.isRequired,
     popularity: PropTypes.number.isRequired,
     trackName: PropTypes.string.isRequired,
     artistName: PropTypes.string.isRequired,

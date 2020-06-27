@@ -16,6 +16,7 @@ import configureStore from './src/Store'
 
 import RecommendedScreen from './src/Components/RecommendedScreen'
 import PlaylistScreen from './src/Components/PlaylistScreen'
+import TrackScreen from './src/Components/TrackScreen'
 import constants from './src/Constants';
 
 const Stack = createStackNavigator();
@@ -25,26 +26,17 @@ const App: () => React$Node = () => {
 	return (
 		<Provider store={store}>
 			<NavigationContainer>
-				<Stack.Navigator>
+				<Stack.Navigator screenOptions={{headerShown: false}}>
 					<Stack.Screen 
 						name="Recommended" 
-						component={RecommendedScreen} 
-						options={{headerShown: false}}/>
+						component={RecommendedScreen} />
 					<Stack.Screen 
 						name="Playlist" 
-						component={PlaylistScreen} 
-						options={{
-							headerShown: false,
-							// headerTitle: '',
-							// headerBackTitleVisible: false, 
-							// headerTintColor: constants.colorGray,
-							// headerStyle: {
-							// 	backgroundColor: constants.colorDark,
-							// },
-							// cardStyle: {
-							// 	backgroundColor: '#fff'
-							// }
-						}}/>
+						component={PlaylistScreen} />
+					<Stack.Screen 
+						name="Track"
+						component={TrackScreen}
+					/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>

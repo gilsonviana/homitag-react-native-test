@@ -32,7 +32,7 @@ const PlaylistScreen = ({
         }
 
         playlistRequest()
-    }, [href])
+    }, [href, token])
 
     if (!playlistState) {
         return <Text>Loading</Text>
@@ -51,7 +51,7 @@ const PlaylistScreen = ({
                 <FlatList 
                     showsVerticalScrollIndicator={false}
                     data={playlistState.tracks.items}
-                    renderItem={({ item }) => <Track trackName={item.track.name} imageUrl={item.track.album.images[0].url} artistName={item.track.artists[0].name} popularity={item.track.popularity} />}
+                    renderItem={({ item }) => <Track href={item.track.href} trackName={item.track.name} imageUrl={item.track.album.images[0].url} artistName={item.track.artists[0].name} popularity={item.track.popularity} />}
                     keyExtractor={(item) => item.track.id}
                 />
             </View>
