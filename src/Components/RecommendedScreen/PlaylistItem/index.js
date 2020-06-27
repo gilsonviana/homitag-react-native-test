@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native'
+import { useNavigation } from '@react-navigation/native';
 
 import constants from '../../../Constants'
 
@@ -7,8 +8,13 @@ const PlaylistItem = ({
     albumUri,
     numOfTracks
 }) => {
+    const navigation = useNavigation()
+
+    const handleOnPress = () => {
+        navigation.navigate('Playlist')
+    }
     return (
-        <TouchableOpacity style={styles.container}>
+        <TouchableOpacity style={styles.container} onPress={handleOnPress}>
             <Image style={styles.image} resizeMethod="auto" resizeMode="contain" source={{uri: albumUri}} />
             <Text style={styles.track}>{numOfTracks} {numOfTracks > 1 ? 'Tracks' : 'Track'}</Text>
         </TouchableOpacity>
