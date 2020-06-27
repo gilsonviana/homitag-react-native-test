@@ -7,6 +7,8 @@ import PropTypes from 'prop-types'
 import playlistService from '../../Services/playlist'
 import constants from '../../Constants'
 
+import Track from './PlaylistTrack'
+
 const PlaylistScreen = ({
     navigation,
     route,
@@ -38,15 +40,21 @@ const PlaylistScreen = ({
 
     return (
         <SafeAreaView style={styles.container}>
-            <View style={{position: 'absolute', left: 0, top: 40}}>
+            {/* <View style={{position: 'absolute', left: 0, top: 40}}>
                 <HeaderBackButton onPress={() => navigation.goBack()} tintColor={constants.colorGray} />
-            </View>
-            <ScrollView style={styles.wrapper}>
-                <Animated.View style={styles.imageContainer}>
-                    <Image style={styles.image} resizeMethod="resize" resizeMode="contain" source={{uri: playlistState.images[0].url}}/>
-                </Animated.View>
+            </View> */}
+            <Animated.View style={styles.imageContainer}>
+                <Image style={styles.image} resizeMethod="resize" resizeMode="contain" source={{uri: playlistState.images[0].url}}/>
+            </Animated.View>
+            <View style={styles.wrapper}>
                 <Text style={styles.title}>{playlistState.name}</Text>
-            </ScrollView>
+                <FlatList 
+                    showsVerticalScrollIndicator={false}
+                    data={playlistState.tracks.items}
+                    renderItem={({ item }) => <Track trackName={item.track.name} imageUrl={item.track.album.images[0].url} artistName={item.track.artists[0].name} popularity={item.track.popularity} />}
+                    keyExtractor={(item) => item.track.id}
+                />
+            </View>
         </SafeAreaView>
     )
 }
@@ -65,6 +73,7 @@ const styles = StyleSheet.create({
         width: undefined
     },
     wrapper: {
+        flex: 1,
         marginTop: 22,
         marginHorizontal: constants.margin
     },

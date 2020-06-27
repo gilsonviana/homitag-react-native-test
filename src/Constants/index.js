@@ -6,7 +6,7 @@ export default {
     colorGray: '#ececec',
 
     // Spacing
-    margin: 6,
+    margin: 8,
 
     // Typography
     title: 18,
