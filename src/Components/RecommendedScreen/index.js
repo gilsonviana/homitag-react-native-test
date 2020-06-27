@@ -2,6 +2,7 @@ import * as React from 'react'
 import { View, FlatList, Text, Animated, StyleSheet } from 'react-native'
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import constants from '../../Constants'
 
@@ -17,9 +18,6 @@ const RecommendedScreen = ({
     const { useState, useEffect } = React 
     
     const [scrollY] = useState(new Animated.Value(0))
-
-    const HEADER_MAX_HEIGHT = 150;
-    const HEADER_MIN_HEIGHT = 0;
 
     useEffect(() => {
         const tokenRequest = async () => {
@@ -40,8 +38,7 @@ const RecommendedScreen = ({
         <View style={styles.container}>
             <Animated.View>
                 <LinearGradient colors={[constants.colorPrimary, constants.colorBlack]}>
-                    <Text style={styles.title}>Recommendations</Text>
-                    <Text style={styles.heading}>{recommendations.message}</Text>
+                    <Text style={styles.title}>{recommendations.message}</Text>
                 </LinearGradient>
             </Animated.View>
             <FlatList 
@@ -56,7 +53,7 @@ const RecommendedScreen = ({
                 numColumns={2}
                 style={styles.list}
                 data={recommendations.playlists}
-                renderItem={({ item }) => <PlaylistItem numOfTracks={item.tracks.total} albumUri={item.images[0].url}/>}
+                renderItem={({ item }) => <PlaylistItem href={item.href} numOfTracks={item.tracks.total} imageUri={item.images[0].url}/>}
                 keyExtractor={(item) => item.id}
             />
         </View>
@@ -70,24 +67,25 @@ const styles = StyleSheet.create({
     },
     title: {
         paddingTop: 70,
-        marginBottom: 12,
+        marginBottom: 22,
         color: constants.colorGray,
         fontSize: 18,
         textAlign: 'center'
     },
     list: {
         flex: 1,
-        marginHorizontal: 6
-    },
-    heading: {
-        textAlign: "center",
-        marginBottom: 22,
-        color: constants.colorGray,
+        marginHorizontal: constants.margin
     }
 })
 
 const mapStateToProps = (state) => ({
     recommendations: state.recommendations
 })
+
+RecommendedScreen.propTypes = {
+    getToken: PropTypes.func.isRequired,
+    getRecommendations: PropTypes.func.isRequired,
+    recommendations: PropTypes.object.isRequired
+}
 
 export default connect(mapStateToProps, { getRecommendations, getToken })(RecommendedScreen)

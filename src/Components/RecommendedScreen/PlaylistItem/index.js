@@ -1,21 +1,25 @@
 import * as React from 'react'
 import { TouchableOpacity, View, Image, Text, StyleSheet } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 import constants from '../../../Constants'
 
 const PlaylistItem = ({
-    albumUri,
+    href,
+    imageUri,
     numOfTracks
 }) => {
     const navigation = useNavigation()
 
     const handleOnPress = () => {
-        navigation.navigate('Playlist')
+        navigation.navigate('Playlist', { href: href })
     }
+
     return (
         <TouchableOpacity style={styles.container} onPress={handleOnPress}>
-            <Image style={styles.image} resizeMethod="auto" resizeMode="contain" source={{uri: albumUri}} />
+            <Image style={styles.image} resizeMethod="auto" resizeMode="contain" source={{uri: imageUri}} />
             <Text style={styles.track}>{numOfTracks} {numOfTracks > 1 ? 'Tracks' : 'Track'}</Text>
         </TouchableOpacity>
     )
@@ -37,4 +41,14 @@ const styles = StyleSheet.create({
     }
 })
 
-export default PlaylistItem
+const mapStateToProps = (state) => ({
+    token: state.auth.token
+})
+
+PlaylistItem.propTypes = {
+    href: PropTypes.string.isRequired,
+    imageUri: PropTypes.string.isRequired, 
+    numOfTracks: PropTypes.number.isRequired
+}
+
+export default connect(mapStateToProps)(PlaylistItem)

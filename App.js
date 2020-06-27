@@ -26,8 +26,25 @@ const App: () => React$Node = () => {
 		<Provider store={store}>
 			<NavigationContainer>
 				<Stack.Navigator>
-					<Stack.Screen name="Recommended" component={RecommendedScreen} options={{headerShown: false}}/>
-					<Stack.Screen name="Playlist" component={PlaylistScreen} options={{headerBackTitleVisible: false, headerTintColor: constants.colorBlack}}/>
+					<Stack.Screen 
+						name="Recommended" 
+						component={RecommendedScreen} 
+						options={{headerShown: false}}/>
+					<Stack.Screen 
+						name="Playlist" 
+						component={PlaylistScreen} 
+						options={{
+							headerShown: false,
+							// headerTitle: '',
+							// headerBackTitleVisible: false, 
+							// headerTintColor: constants.colorGray,
+							// headerStyle: {
+							// 	backgroundColor: constants.colorDark,
+							// },
+							// cardStyle: {
+							// 	backgroundColor: '#fff'
+							// }
+						}}/>
 				</Stack.Navigator>
 			</NavigationContainer>
 		</Provider>
