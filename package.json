@@ -51,7 +51,7 @@
       "src"
     ],
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js" <--- over here
+      "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
     },
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)?$",
     "moduleFileExtensions": [
