@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recommended screen should render with initial state 1`] = `
+<BVLinearGradient
+  colors={
+    Array [
+      4294091621,
+      4281354078,
+      4281354078,
+    ]
+  }
+  endPoint={
+    Object {
+      "x": 0.5,
+      "y": 1,
+    }
+  }
+  locations={null}
+  startPoint={
+    Object {
+      "x": 0.5,
+      "y": 0,
+    }
+  }
+  style={
+    Object {
+      "backgroundColor": "#222831",
+      "flex": 1,
+    }
+  }
+>
+  <ActivityIndicator
+    animating={true}
+    color="#ececec"
+    hidesWhenStopped={true}
+    size="large"
+    style={
+      Object {
+        "alignSelf": "center",
+        "flex": 1,
+      }
+    }
+  />
+</BVLinearGradient>
+`;
