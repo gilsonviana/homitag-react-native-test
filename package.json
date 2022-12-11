@@ -17,7 +17,7 @@
     "axios": "^0.19.2",
     "expo-constants": "^9.1.1",
     "prop-types": "^15.7.2",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "react": "16.11.0",
     "react-native": "0.62.2",
     "react-native-gesture-handler": "^1.6.1",
